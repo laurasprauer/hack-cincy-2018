@@ -1,0 +1,63 @@
+@import './src/variables';
+
+.container {
+  background-color: $white;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba($black, 0.2);
+  display: inline-block;
+  margin: 20px;
+  max-width: 400px;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+  width: calc(100% - 40px);
+
+  svg {
+    display: inline-block;
+    height: 55px;
+    position: relative;
+    top: 5px;
+    width: 55px;
+  }
+}
+
+.text {
+  display: inline-block;
+  padding: 0 10px;
+  width: calc(100% - 130px);
+}
+
+.miles {
+  color: rgba($darkGray, 0.9);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.buttonsContainer {
+  margin-top: 10px;
+
+  .green {
+    background-color: $white;
+    border: 1px solid $green;
+    color: $black;
+    width: calc(50% - 20px);
+
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+  }
+
+  .red {
+    background-color: $white;
+    border: 1px solid $red;
+    color: $black;
+    width: calc(50% - 20px);
+
+    &:hover {
+      background-color: $red;
+      color: $white;
+    }
+  }
+}

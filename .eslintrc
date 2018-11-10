@@ -17,6 +17,9 @@
     "react/forbid-prop-types": 0,
     "jsx-a11y/label-has-for": 0,
     "no-undef": 0,
+    "no-plusplus": 0,
+    "no-unused-vars": 0,
     "react/no-unused-state": 0,
+    "react/prefer-stateless-function": 0,
   }
 }
