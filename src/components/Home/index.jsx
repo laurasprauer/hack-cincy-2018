@@ -53,6 +53,7 @@ export default class Home extends React.Component {
               address: landmark[0],
               miles: landmark[3].toFixed(2),
               visited: false,
+              description: landmark[4],
             };
           }
           this.setState({

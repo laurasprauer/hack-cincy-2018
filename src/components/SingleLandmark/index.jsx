@@ -25,7 +25,7 @@ export default class DisplayLandmark extends React.Component {
         {landmarkImg}
         <div className={styles.text}>
           <h2>{this.props.landmark.name}</h2>
-          <h3>{this.props.landmark.type}</h3>
+          <h3>{this.props.landmark.description}</h3>
         </div>
         <div className={styles.miles}>{this.props.landmark.miles} Miles</div>
         <div className={styles.buttonsContainer}>
