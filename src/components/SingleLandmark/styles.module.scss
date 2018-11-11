@@ -47,12 +47,15 @@
     }
   }
 
+  button {
+    position: relative;
+    width: calc(50% - 20px);
+  }
+
   .green {
     background-color: $white;
     border: 1px solid $green;
     color: $black;
-    position: relative;
-    width: calc(50% - 20px);
 
     &:hover {
       background-color: $green;
@@ -77,7 +80,6 @@
     background-color: $white;
     border: 1px solid $red;
     color: $black;
-    width: calc(50% - 20px);
 
     &:hover {
       background-color: $red;

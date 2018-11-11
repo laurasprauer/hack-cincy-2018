@@ -12,8 +12,8 @@ export default class DisplayLandmarks extends React.Component {
     const landmarks = [];
 
     for (let i = 0; i < this.props.landmarks.length; i++) {
-      console.log(this.props.landmarks[i]);
       landmarks.push(<SingleLandmark
+        key={i}
         landmark={this.props.landmarks[i]}
         toggleVisited={this.props.toggleVisited}
         currentAddress={this.props.currentAddress}
