@@ -62,6 +62,24 @@
   }
 }
 
+.redNum{
+  color: $red;
+  font-weight: bold;
+}
+
+.ranks{
+  background-color: $blue;
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  margin: 25px auto;
+  padding: 5px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
 .error {
   color: $red;
 }
