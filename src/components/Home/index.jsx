@@ -18,6 +18,12 @@ export default class Home extends React.Component {
       landmarks: [],
       noAddressError: false,
       disabledBtn: true,
+      showVisitedSuccess: false,
+      visitedCounter: {
+        total: 0,
+        c: 0,
+        l: 0,
+      },
     };
   }
 
@@ -151,17 +157,45 @@ export default class Home extends React.Component {
   }
 
   toggleVisited = (landmarkId) => {
-    console.log('visited!');
-    console.log(landmarkId);
-    console.log(this.state.landmarks[landmarkId]);
     const landmarks = this.state.landmarks;
     const visited = landmarks[landmarkId].visited;
-    console.log(landmarks[landmarkId]);
     landmarks[landmarkId].visited = !visited;
+
+    const visitedCounter = this.state.visitedCounter;
+    visitedCounter.total += 1;
+    if (!landmarks[landmarkId].visited) {
+      visitedCounter.total -= 1;
+    }
+
+    const type = landmarks[landmarkId].type;
+    if (type === 'Landmark') {
+      visitedCounter.l += 1;
+      if (!landmarks[landmarkId].visited) {
+        visitedCounter.l -= 1;
+      }
+    } else {
+      visitedCounter.c += 1;
+      if (!landmarks[landmarkId].visited) {
+        visitedCounter.c -= 1;
+      }
+    }
+
+    console.log('helloo');
+
     this.setState({
       landmarks,
+      showVisitedSuccess: true,
+      visitedCounter,
+      viewLandmarks: false,
     });
   };
+
+  continueExploring = (landmarkId) => {
+    this.setState({
+      viewLandmarks: true,
+      showVisitedSuccess: false,
+    });
+  }
 
   render() {
     let currentLocBtnText = 'Use My Current Location';
@@ -205,6 +239,18 @@ export default class Home extends React.Component {
             toggleVisited={this.toggleVisited}
             currentAddress={this.state.address}
           />
+        </div>
+      );
+    } else if (this.state.showVisitedSuccess) {
+      let places = 'places';
+      if (this.state.visitedCounter.total <= 1) {
+        places = 'place';
+      }
+      pageContent = (
+        <div className={styles.wrapper}>
+          <h1>Great Job!</h1>
+          <p>You&apos;ve been to {this.state.visitedCounter.total} {places}!</p>
+          <button onClick={this.continueExploring}>Continue Exploring</button>
         </div>
       );
     }

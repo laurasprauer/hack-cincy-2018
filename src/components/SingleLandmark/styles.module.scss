@@ -5,7 +5,7 @@
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba($black, 0.2);
   display: inline-block;
-  margin: 20px;
+  margin: 10px;
   max-width: 400px;
   padding: 20px;
   position: relative;
@@ -49,13 +49,17 @@
 
   button {
     position: relative;
-    width: calc(50% - 20px);
+    width: calc(50% - 10px);
+    margin: 10px;
+    margin-right: 0;
   }
 
   .green {
     background-color: $white;
     border: 1px solid $green;
     color: $black;
+    margin-left: 0;
+    margin-right: 10px;
 
     &:hover {
       background-color: $green;
@@ -68,7 +72,7 @@
 
     .googleMaps {
       height: 18px;
-      left: 32px;
+      left: 15px;
       margin-right: 5px;
       position: absolute;
       top: 13px;
