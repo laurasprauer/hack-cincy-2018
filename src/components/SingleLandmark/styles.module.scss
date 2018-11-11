@@ -12,18 +12,20 @@
   text-align: left;
   width: calc(100% - 40px);
 
-  svg {
+  .icon {
     display: inline-block;
     height: 55px;
-    position: relative;
-    top: 5px;
+    position: absolute;
+    top: 25px;
     width: 55px;
   }
 }
 
 .text {
   display: inline-block;
+  left: 55px;
   padding: 0 10px;
+  position: relative;
   width: calc(100% - 130px);
 }
 
@@ -31,21 +33,43 @@
   color: rgba($darkGray, 0.9);
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 27px;
 }
 
 .buttonsContainer {
   margin-top: 10px;
 
+  a {
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
   .green {
     background-color: $white;
     border: 1px solid $green;
     color: $black;
+    position: relative;
     width: calc(50% - 20px);
 
     &:hover {
       background-color: $green;
       color: $white;
+    }
+
+    span {
+      margin-left: 16px;
+    }
+
+    .googleMaps {
+      height: 18px;
+      left: 32px;
+      margin-right: 5px;
+      position: absolute;
+      top: 13px;
+      width: 18px;
     }
   }
 

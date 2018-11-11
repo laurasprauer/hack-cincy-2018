@@ -80,12 +80,14 @@ button {
 a {
   box-shadow: inset 0 -2px 0 0 $red;
   color: $black;
+  cursor: pointer;
   font-family: $fontRoboto;
   font-weight: bold;
   text-decoration: none;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, color 0.3s;
 
   &:hover {
     box-shadow: inset 0 -16px 0 0 $red;
+    color: $white;
   }
 }

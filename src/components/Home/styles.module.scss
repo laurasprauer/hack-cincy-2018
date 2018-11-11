@@ -62,7 +62,12 @@
   }
 }
 
+.error {
+  color: $red;
+}
+
 .viewLandmarks {
+  overflow: auto;
   position: relative;
   text-align: center;
   width: 100%;

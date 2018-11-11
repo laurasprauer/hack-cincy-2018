@@ -15,28 +15,54 @@ export default class Home extends React.Component {
       address: '',
       loadingCurrentLocation: false,
       viewLandmarks: false,
-      landmarks: [
-        {
-          name: 'The Zoo!',
-          type: 'Landmark',
-          Address: '1234 Laura Ln, Cincinnati OH',
-          miles: 0.34,
-          visited: false,
-        },
-        {
-          name: 'Skyline',
-          type: 'Chili Resturaunt',
-          Address: '1234 Hello Ave, Cincinnati OH',
-          miles: 1.9,
-          visited: false,
-        },
-      ],
+      landmarks: [],
+      noAddressError: false,
     };
   }
 
   getStarted = () => {
+    if (this.state.lat && this.state.long && this.state.address) {
+      fetch('https://dns0mi9ijd.execute-api.us-east-1.amazonaws.com/dev/calculateClosestSite', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          lat: this.state.lat,
+          lng: this.state.long,
+        }),
+      })
+        .then(response => response.json())
+        .then((data) => {
+          const landmarks = [];
+          for (let i = 0; i < data.body.length; i++) {
+            const landmark = data.body[i];
+            landmarks[i] = {
+              key: i,
+              name: landmark[1],
+              type: landmark[2],
+              address: landmark[0],
+              miles: landmark[3].toFixed(2),
+              visited: false,
+            };
+          }
+          this.setState({
+            viewLandmarks: true,
+            landmarks,
+          });
+        });
+    } else {
+      this.setState({
+        noAddressError: true,
+      });
+    }
+  };
+
+  startOver = () => {
     this.setState({
-      viewLandmarks: true,
+      landmarks: [],
+      viewLandmarks: false,
     });
   };
 
@@ -56,27 +82,71 @@ export default class Home extends React.Component {
   };
 
   convertPositionToAddress = (position) => {
-    console.log(`Latitude: ${position.coords.latitude
-    }<br>Longitude: ${position.coords.longitude}`);
-
-    this.setState({
-      long: position.coords.longitude,
-      lat: position.coords.latitude,
-      address: '1311 Vine St, Cincinnati, OH 45202',
-      loadingCurrentLocation: false,
-    });
+    fetch('https://dns0mi9ijd.execute-api.us-east-1.amazonaws.com/dev/getAddrFromLatLong', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({
+          address: data.addr,
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+          loadingCurrentLocation: false,
+          noAddressError: false,
+        });
+      });
   };
 
   handleAddressChange = (event) => {
+    const address = event.target.value;
+    fetch('https://dns0mi9ijd.execute-api.us-east-1.amazonaws.com/dev/getLatLongFromAddr', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        addr: address,
+      }),
+    })
+      .then(response => response.json())
+      .then((result) => {
+        this.setState({
+          address,
+          lat: result.lat,
+          long: result.lng,
+          noAddressError: false,
+        });
+      });
+  };
+
+  toggleVisited = (id = 0) => {
+    const landmarks = this.state.landmarks;
+    const visited = landmarks[id].visited;
+    landmarks[id].visited = !visited;
     this.setState({
-      address: event.target.value,
+      landmarks,
     });
+    console.log('visited!');
   };
 
   render() {
     let currentLocBtnText = 'Use My Current Location';
     if (this.state.loadingCurrentLocation) {
       currentLocBtnText = 'Loading Your Location...';
+    }
+
+    let showError = null;
+    if (this.state.noAddressError) {
+      showError = <p className={styles.error}>Please enter an address</p>;
     }
 
     let pageContent = (
@@ -95,6 +165,7 @@ export default class Home extends React.Component {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C153.755 0 70.573 83.182 70.573 185.426c0 126.888 165.939 313.167 173.004 321.035 6.636 7.391 18.222 7.378 24.846 0 7.065-7.868 173.004-194.147 173.004-321.035C441.425 83.182 358.244 0 256 0zm0 278.719c-51.442 0-93.292-41.851-93.292-93.293S204.559 92.134 256 92.134s93.291 41.851 93.291 93.293-41.85 93.292-93.291 93.292z" /></svg>
           </div>
         </div>
+        {showError}
         <button onClick={this.getStarted}>Get Started</button>
       </div>
     );
@@ -103,8 +174,11 @@ export default class Home extends React.Component {
       pageContent = (
         <div className={styles.viewLandmarks}>
           <h1>Near You</h1>
+          <a onClick={this.startOver}>Start Over</a>
           <DisplayLandmarks
             landmarks={this.state.landmarks}
+            toggleVisited={this.toggleVisited}
+            currentAddress={this.state.address}
           />
         </div>
       );

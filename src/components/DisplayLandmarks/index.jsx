@@ -12,8 +12,11 @@ export default class DisplayLandmarks extends React.Component {
     const landmarks = [];
 
     for (let i = 0; i < this.props.landmarks.length; i++) {
+      console.log(this.props.landmarks[i]);
       landmarks.push(<SingleLandmark
         landmark={this.props.landmarks[i]}
+        toggleVisited={this.props.toggleVisited}
+        currentAddress={this.props.currentAddress}
       />);
     }
     return landmarks;
@@ -21,11 +24,13 @@ export default class DisplayLandmarks extends React.Component {
 
   render() {
     return (
-      <div>{this.getLandmarks()}</div>
+      <div className={styles.container}>{this.getLandmarks()}</div>
     );
   }
 }
 
 DisplayLandmarks.propTypes = {
   landmarks: PropTypes.array.isRequired,
+  toggleVisited: PropTypes.func.isRequired,
+  currentAddress: PropTypes.string.isRequired,
 };
