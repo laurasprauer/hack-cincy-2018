@@ -28,11 +28,16 @@
   background-color: $white;
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba($black, 0.2);
-  margin: 0 auto;
+  margin: 10px auto;
   max-width: 650px;
   padding: 30px;
   width: calc(100% - 40px);
   z-index: 2;
+  position: relative;
+  &.bottom{
+    padding: 10px 30px;
+    margin-top:20px;
+  }
 }
 
 .location {
@@ -62,6 +67,29 @@
   }
 }
 
+.greenBtn{
+  background-color: #5BBF90;
+
+  &:hover {
+    background-color: darken(#5BBF90, 20%);
+  }
+}
+
+.above{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  overflow: auto;
+}
+
+.goBack{
+  position: absolute;
+  top: 13px;
+  left: 15px;
+}
+
 .redNum{
   color: $red;
   font-weight: bold;
@@ -74,6 +102,11 @@
   border-radius: 200px;
   margin: 25px auto;
   padding: 5px;
+}
+
+.logo{
+  width: 180px;
+  margin: 20px;
 }
 
 .bold{
@@ -90,4 +123,43 @@
   text-align: center;
   width: 100%;
   z-index: 2;
+}
+
+.title{
+  margin-bottom:20px;
+}
+
+.startOver{
+  left: 20px;
+  position: absolute;
+  top: 35px;
+}
+
+.badge {
+  background-color: $white;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba($black, 0.2);
+  display: inline-block;
+  margin: 10px;
+  max-width: 650px;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+  width: calc(100% - 40px);
+
+  .icon {
+    display: inline-block;
+    height: 55px;
+    position: absolute;
+    top: 25px;
+    width: 55px;
+  }
+}
+
+.text {
+  display: inline-block;
+  left: 55px;
+  padding: 0 0px 0 20px;
+  position: relative;
+  width: calc(100% - 55px);
 }
