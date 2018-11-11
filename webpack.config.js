@@ -2,7 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
+// const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // Constant with our paths
 const paths = {
@@ -29,12 +29,12 @@ module.exports = {
       template: path.join(paths.SRC, 'index.html'),
     }),
     new ExtractTextPlugin('styles.css'),
-    new StyleLintPlugin({
-      configFile: '.stylelintrc.json',
-      context: 'src',
-      syntax: 'scss',
-      files: '**/*.scss',
-    })
+    // new StyleLintPlugin({
+    //   configFile: '.stylelintrc.json',
+    //   context: 'src',
+    //   syntax: 'scss',
+    //   files: '**/*.scss',
+    // })
   ],
   module: {
     rules: [
