@@ -20,12 +20,17 @@ export default class DisplayLandmark extends React.Component {
       visitedButton = <button onClick={() => this.props.toggleVisited(this.props.landmark.key)}>Visited</button>;
     }
 
+    let description = <h3>{this.props.landmark.description}</h3>;
+    if (!this.props.landmark.description) {
+      description = <div className={styles.space} />;
+    }
+
     return (
       <div className={styles.container}>
         {landmarkImg}
         <div className={styles.text}>
           <h2>{this.props.landmark.name}</h2>
-          <h3>{this.props.landmark.description}</h3>
+          {description}
         </div>
         <div className={styles.miles}>{this.props.landmark.miles} Miles</div>
         <div className={styles.buttonsContainer}>
