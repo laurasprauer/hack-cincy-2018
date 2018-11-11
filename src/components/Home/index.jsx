@@ -418,7 +418,7 @@ export default class Home extends React.Component {
         this.getRankCardContent(this.state.visitedCounter.total, false)
       );
     } else if (this.state.showViewAccomp) {
-      const currentRank = this.getRankCardContent(22, true);
+      const currentRank = this.getRankCardContent(10, true);
       pageContent = (
         <div className={styles.above}>
           {currentRank}
