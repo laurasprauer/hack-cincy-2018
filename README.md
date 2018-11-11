@@ -1,6 +1,4 @@
-<img src="./src/assets/Bites_Logo.svg" width="300" height="300" style="margin: 0 auto;">
+<img src="./src/assets/Bites_Logo.svg" width="300" height="300">
 
-<center>
-  Bites & Sites!
-  https://hack-cincy.netlify.com/
-</center>
+Bites & Sites! <br>
+https://hack-cincy.netlify.com/
